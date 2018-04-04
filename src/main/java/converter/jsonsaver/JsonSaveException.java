@@ -1,17 +1,15 @@
-package converter.yaml2json;
+package converter.jsonsaver;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.nio.file.Path;
 
-public class ConvertException extends RuntimeException {
+public class JsonSaveException extends RuntimeException {
 
-    public final Path inputFile;
     public final Path outputFile;
 
-    public ConvertException(Throwable cause, Path inputFile, Path outputFile) {
+    public JsonSaveException(Throwable cause, Path outputFile) {
         super(cause);
-        this.inputFile = inputFile;
         this.outputFile = outputFile;
     }
 
