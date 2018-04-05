@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.Properties;
 
 final class Cli {
 
@@ -23,10 +24,12 @@ final class Cli {
 
     Path sourceFilePath;
     Path targetFilePath;
+    private final AppProps appProps;
 
     Cli(String... args) {
+        appProps = new AppProps();
+        CommandLineParser parser = new DefaultParser();
         try {
-            CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(OPTIONS, Objects.requireNonNull(args));
             if (cmd.hasOption("v")) {
                 printVersion();
@@ -48,12 +51,12 @@ final class Cli {
 
     void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("yaml2json", OPTIONS);
+        formatter.printHelp(appProps.appName, OPTIONS);
         System.exit(0);
     }
 
     private void printVersion() {
-        System.out.println("version");
+        System.out.println(appProps.appName + " : " + appProps.version);
         System.exit(0);
     }
 }
